@@ -3,22 +3,24 @@
 // @namespace    http://jeltelagendijk.nl
 // @version      0.1
 // @description  Adds functionalities to InnerCircle
-// @author       Jelte Lagendijk
+// @author       j3lte
 // @match        https://www.theinnercircle.co/*
+// @include      https://www.theinnercircle.co/*
 // @grant        none
+// @run-at       document-start
 // ==/UserScript==
 
 function ic_FunctionWrapper() {
     // DEFINE $IC
     var win = window;
     var $ic;
-    
+
 	if (typeof unsafeWindow != 'undefined') win = unsafeWindow;
     if (typeof unsafeWindow == 'undefined' ) $ic = jQuery;
 	else $ic = unsafeWindow.jQuery || jQuery;
-    
+
     var $body = $ic('body');
-    
+
     if (!win.console) {
         win.console = {
             log : function(){}
@@ -50,67 +52,67 @@ function ic_FunctionWrapper() {
             // no head yet, stick it whereever
             document.documentElement.appendChild(node);
         }
-    }   
-    
+    }
+
     var $memBox = $ic('<div />');
-    
+
     var $userBox = $ic('<div id="userBox" style="display: none;" />');
     $body.append($userBox);
-    
+
     var $loader = $ic('<div id="loader" style="opacity: 0.6; z-index: 10000; display: none; position: fixed; right: 20px;bottom: 0; width: 240px; height: 16px; background: #0099B0;text-align: center; color: #FFF; padding: 5px 0;"></div>')
     $body.append($loader);
-    
+
     function showLoader(message) {
     	$loader.text(message);
         if ($loader.is(':hidden')) {
         	$loader.show();
         }
     }
-    
+
     function hideLoader() {
         if (!$loader.is(':hidden')) {
         	$loader.hide();
         }
     }
-    
-	var memLinkRegEx = /(http|https):\/\/www\.theinnercircle\.co\/member\/\d+/;    
+
+	var memLinkRegEx = /(http|https):\/\/www\.theinnercircle\.co\/member\/\d+/;
     var timer, ev, link, userBoxes  = {};
-    
+
     function loadMember(link) {
         showLoader('Loading member...');
-    	$memBox.load(link, function(){                        
+    	$memBox.load(link, function(){
             //callback after your data is in loaded into body.
             var userName = $memBox.find('.username').parent();
             var jobTitle = $memBox.find('.job_title');
             var thumbs = $memBox.find('#user_photos');
             var profileFields = $memBox.find('.profile_field');
-            
+
             $userBox.html('');
             $userBox.append(userName);
             $userBox.append(jobTitle);
             if (thumbs.find('.rsImg').length) {
-                
+
                 var h = Math.round(thumbs.find('.rsImg').length / 3) * 50;
                 thumbs.css('height', h + 'px');
-                
+
                 thumbs.find('.rsImg').each(function (i){
                     if ($ic(this).data('rsbigimg')) {
                     	$ic(this).attr('href', $ic(this).data('rsbigimg'));
                     }
                     $ic(this).attr('target',"_blank");
                 });
-                
+
             	$userBox.append(thumbs);
-            }           
+            }
             $userBox.append(profileFields);
             $userBox.append('<span class="ui-button-icon-primary ui-icon ui-icon-closethick close-user-box" style="position: absolute; top: 0; right: 0;"></span>');
-            
+
             userBoxes[link] = $userBox.html();
             link = null;
-            
+
             hideLoader();
             $userBox.fadeIn(500);
-            
+
             win.console.log('[IC Enhancement Suite] :: User shown');
     	});
     }
@@ -121,22 +123,22 @@ function ic_FunctionWrapper() {
         if (ev.currentTarget && ev.currentTarget.href && memLinkRegEx.test(ev.currentTarget.href) && (ev.currentTarget.href !== win.location.href)) {
 
             link = ev.currentTarget.href;
-            
+
             if (userBoxes[link] != undefined && userBoxes[link] !== null) {
-                
+
                 $userBox.html(userBoxes[link]);
                 $userBox.show();
-            
+
             } else {
             	showLoader('Loading member in 7s...');
                 timer = win.setTimeout(function() {
                     // Execute when timer reached
                     win.console.log('[IC Enhancement Suite] :: Loading user : ' + link);
                     loadMember(link);
-                    
+
                     timer = null, ev = null;
                 }, 7000);
-                
+
             }
         }
     });
@@ -146,12 +148,12 @@ function ic_FunctionWrapper() {
             win.clearTimeout(timer);
             ev = null;
         }
-        hideLoader();        
+        hideLoader();
     });
-    
+
     // Hide top question
     //$ic('.nearby-block.question').hide();
-    
+
     function open_new() {
     	$ic(this).target = "_blank";
         if ($ic(this).prop('href')) {
@@ -165,31 +167,31 @@ function ic_FunctionWrapper() {
         }
         return false;
     }
-    
+
     // Open online members in new tab/window
 	$body.on('click', '.online_box a', open_new);
-    
+
     // Open featured in new tab/window
     $body.on('click','.featured_box a', open_new);
-    
+
     // Userbox clicks
     $body.on('click', '#userBox .username', open_new);
     $body.on('click','.close-user-box', function() { $userBox.hide(); });
-   
+
     // Open interest in new tab/window
     $body.on('click','.interest_box a', open_new);
-    
+
     // Remove match box if there are no matches
     if ($('.potential_match .match-last').length) {
     	console.log('[IC Enhancement Suite] :: No matches, hiding box');
         $ic('.potential_match').hide();
     }
-    
-    // Open fancybox images originals 
+
+    // Open fancybox images originals
     $body.on('click','.fancybox-image', open_new);
-    
+
     //console.log($ic);
-    win.console.log("[IC Enhancement Suite] :: Succesfully loaded Suite");    
+    win.console.log("[IC Enhancement Suite] :: Succesfully loaded Suite");
 }
 
 var ic_ScriptObject = document.createElement("script");
