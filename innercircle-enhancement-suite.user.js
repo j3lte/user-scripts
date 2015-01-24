@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InnerCircle Enhancement Suite
 // @namespace    http://jeltelagendijk.nl
-// @version      0.1
+// @version      0.1.1
 // @description  Adds functionalities to InnerCircle
 // @author       j3lte
 // @match        https://www.theinnercircle.co/*
