@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         InnerCircle Enhancement Suite
 // @namespace    http://jeltelagendijk.nl
-// @version      0.2.1
+// @version      0.2.2
 // @description  Adds functionalities to InnerCircle
 // @author       j3lte
 // @match        https://www.theinnercircle.co/*
@@ -12,7 +12,7 @@
 function ic_FunctionWrapper() {
 
     // Define global version
-    var version = "0.2.1";
+    var version = "0.2.2";
 
     // Variables
     var win = window;
@@ -83,7 +83,7 @@ function ic_FunctionWrapper() {
         'body.night h1, body.night h1 a, body.night .job_title, body.night .profile_field b { color:#fff; }',
         'body.night .rsDefault, body.night .rsDefault .rsOverflow, body.night .rsDefault .rsSlide, body.night .rsDefault .rsVideoFrameHolder, body.night .rsDefault .rsThumbs { background-color: #323232; }',
         'body.night .member_event_date, body.night .event_date, body.night .invites_count, body.night .my_trip_date { background-color: #0099B0; }',
-        'body.night .grey, .message_accent { background-color: #151415; }',
+        'body.night .grey, body.night .message_accent { background-color: #151415; }',
         'body.night .featured_box, body.night .interest_box, body.night .ui-tooltip { color: #151415; }',
         'body.night .nearby-block { border-top:5px solid #151415; }',
         'body.night .widget, body.night .hotposts_container { color: #302E31; }'
