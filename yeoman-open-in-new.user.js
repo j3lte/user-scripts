@@ -6,8 +6,8 @@
 // @author       j3lte
 // @updateURL    https://github.com/j3lte/user-scripts/raw/master/yeoman-open-in-new.user.js
 // @downloadURL  https://github.com/j3lte/user-scripts/raw/master/yeoman-open-in-new.user.js
-// @match        http://http://yeoman.io/generators/
-// @include      http://http://yeoman.io/generators/
+// @match        http://yeoman.io/generators/
+// @include      http://yeoman.io/generators/
 // @license      MIT License https://raw.githubusercontent.com/j3lte/user-scripts/master/LICENSE
 // @grant        unsafeWindow
 // ==/UserScript==
