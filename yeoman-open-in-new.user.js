@@ -1,17 +1,15 @@
 // ==UserScript==
-// @name         InnerCircle Enhancement Suite
+// @name         Yeoman Userscript
 // @namespace    https://github.com/j3lte/user-scripts
-// @version      0.3.6
-// @description  Adds functionalities to InnerCircle
+// @version      0.0.1
+// @description  Adds functionalities to Yeoman website
 // @author       j3lte
 // @updateURL    https://github.com/j3lte/user-scripts/raw/master/yeoman-open-in-new.user.js
 // @downloadURL  https://github.com/j3lte/user-scripts/raw/master/yeoman-open-in-new.user.js
 // @match        http://http://yeoman.io/generators/
 // @include      http://http://yeoman.io/generators/
-// @icon         https://raw.githubusercontent.com/j3lte/user-scripts/master/ic_plus.png
 // @license      MIT License https://raw.githubusercontent.com/j3lte/user-scripts/master/LICENSE
 // @grant        unsafeWindow
-// @date         01.26.2015
 // ==/UserScript==
 
 function _functionWrapper() {
@@ -32,6 +30,8 @@ function _functionWrapper() {
     } else {
         $ = unsafeWindow.jQuery || jQuery
     }
+
+    if (!$) return false;
 
     // Body element
     var $body = $('body');
