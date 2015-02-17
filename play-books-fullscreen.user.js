@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Add fullscreen button to Google Play Books
+// @name         Google Play Books Fullscreen button
 // @namespace    https://github.com/j3lte/user-scripts
 // @version      0.0.1
-// @description  Adds functionalities to Yeoman website
+// @description  Add fullscreen button to Google Play Books
 // @author       j3lte
 // @updateURL    https://github.com/j3lte/user-scripts/raw/master/play-books-fullscreen.user.js
 // @downloadURL  https://github.com/j3lte/user-scripts/raw/master/play-books-fullscreen.user.js
